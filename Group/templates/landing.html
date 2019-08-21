@@ -1,0 +1,63 @@
+
+<!-- "Jokes"
+Richard Kim
+Neil Denning -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/landing_stylesheet.css') }}">
+    <title>Jokes Landing</title>
+</head>
+<body>
+    <main id="container">
+        <h1>Welcome "{{ user.first_name }}", please share a joke. </h1>
+        <a class="edit_link" href="/edit/{{session['user_id']}}">Edit My Account</a> 
+        <a class="logout_button" href="/logout">Logout</a>
+
+        <div class="top">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="error_red">{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}     
+            <form action="/save_joke" method="POST">    
+                <label for="joke">Joke</label>
+                <input class="joke_box" type="text" name="joke" placeholder="funny joke here...">
+
+                <label for="punchline">Punchline</label>
+                <input class="joke_box" type="text" name="punchline" placeholder="funny punchline here...">
+
+                <input class="submit_button" type="submit" name="submit" value="Share Joke">
+            </form>
+        </div>
+
+        <div class="middle">
+            {% if jokes %}
+                {% for joke in jokes %}
+                <div class="joke_post">
+                    <p><a href="/user_profile/{{joke['user_id']}}">{{ joke.alias }}</a> says:</p>
+                    <p><span class="black_bg" >Joke:</span> "{{ joke['joke']}}"</p>    
+                    <p><span class="black_bg" >Punchline:</span> "{{ joke['punchline']}}"</p>      
+                    <!-- I had my like/unlike here, but deleted it.  -->
+                    {% if session['user_id'] == joke.user_id %}
+                        <a href="/delete_joke/{{joke['id']}}"><button>Delete Joke</button></a>                   
+                    {% endif %}     
+           
+                </div>                    
+                {%  endfor %}
+            {% endif %}
+        </div>
+
+        <footer>
+            <h4>Powered By <span class="red">GoodTimes</span></h4>
+        </footer>
+    </main>
+</body>
+</html>
