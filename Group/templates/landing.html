@@ -16,7 +16,7 @@ Neil Denning -->
 <body>
     <main id="container">
         <h1>Welcome "{{ user.first_name }}", please share a joke. </h1>
-        <a class="edit_link" href="/edit/{{session['user_id']}}">Edit My Account</a> 
+        <a class="/edit/1" href="/edit/{{session['user_id']}}">Edit My Account</a> 
         <a class="logout_button" href="/logout">Logout</a>
 
         <div class="top">
@@ -42,7 +42,7 @@ Neil Denning -->
             {% if jokes %}
                 {% for joke in jokes %}
                 <div class="joke_post">
-                    <p><a href="/user_profile/{{joke['user_id']}}">{{ joke.alias }}</a> says:</p>
+                    <p><a href="/details/{{joke['user_id']}}">{{ joke.alias }}</a> says:</p>
                     <p><span class="black_bg" >Joke:</span> "{{ joke['joke']}}"</p>    
                     <p><span class="black_bg" >Punchline:</span> "{{ joke['punchline']}}"</p>      
                     <!-- I had my like/unlike here, but deleted it.  -->
