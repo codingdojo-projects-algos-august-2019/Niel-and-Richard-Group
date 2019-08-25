@@ -193,48 +193,51 @@ def delete_joke(joke_id):
 
     return redirect("/landing")
 
-@app.route("/details/<m_id>")
-def message_details(m_id):
-    #mysql = mysqlconnection('mydb')
-    mysql = connectToMySQL('jokes')
-    query = "SELECT * FROM jokes LEFT JOIN users ON jokes.author = users.idusers WHERE jokes.id = %(mid)s"
+@app.route("/details/<joke_id>")
+def joke_details(joke_id):
+    mysql = connectToMySQL(database)
+    query = "SELECT * FROM jokes LEFT JOIN users ON jokes.user_id = users.id WHERE jokes.id = %(mid)s"
     data = {
-        'mid': m_id
+        'joke_id': joke_id
     }
-    messages = mysql.query_db(query, data)
-    mysql = connectToMySQL('jokes')
+    jokes = mysql.query_db(query, data)
+    mysql = connectToMySQL(database)
     query = "SELECT * FROM likes LEFT JOIN users ON users_id = users.id WHERE jokes_id =  %(mid)s"
     data = {
-        'mid': m_id
+        'joke_id': joke_id
     }
-    users_who_liked = mysql.query_db(query, data)
+    likes = mysql.query_db(query, data)
     print("0")
     print("here i am")
-    return render_template("/details", jokes=jokes[0], likes=likes)
+    return render_template("/details.html", jokes=jokes[0], likes=likes)
 
 
-@app.route("/edit")
+@app.route("/edit/1")
 def edit_user():
-    query = "SELECT * FROM users WHERE idUsers = %(id)s"
+    query = "SELECT * FROM users WHERE id = %(id)s"
     data = {
         'id': session['user_id']
     }
-    mysql = connectToMySQL('jokes')
+    mysql = connectToMySQL(database)
     user = mysql.query_db(query, data)
-    return render_template("/edit", user=user[0])
+    return render_template("/edit.html", user=user[0])
 
-@app.route("/edit", methods=['POST'])
+@app.route("/edit/1", methods=['POST'])
 def update_user():
-    query = "UPDATE users SET first_name=%(fn)s, last_name=%(ln)s, email=%(email)s, updated_at=NOW() WHERE idusers=%(id)s"
+    query = "UPDATE users SET first_name=%(fn)s, last_name=%(ln)s, email=%(email)s, updated_at=NOW() WHERE id=%(id)s"
     data = {
         'fn': request.form['first_name'],
         'ln': request.form['last_name'],
         'email': request.form['email'],
         'id': session['user_id']
     }
-    mysql = connectToMySQL('mydb')
+    mysql = connectToMySQL(database)
     mysql.query_db(query, data)
     return redirect("/landing")
+
+@app.route('/back')
+def back():
+    return redirect('/landing')
 
 if __name__=="__main__":
     app.run(debug=True)
