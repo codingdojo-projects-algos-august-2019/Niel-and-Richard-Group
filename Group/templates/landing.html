@@ -45,7 +45,13 @@ Neil Denning -->
                     <p><a href="/details/{{joke['user_id']}}">{{ joke.alias }}</a> says:</p>
                     <p><span class="black_bg" >Joke:</span> "{{ joke['joke']}}"</p>    
                     <p><span class="black_bg" >Punchline:</span> "{{ joke['punchline']}}"</p>      
-                    <!-- I had my like/unlike here, but deleted it.  -->
+                    {% if joke['id'] in liked_jokes %}
+                    <p><a href="/unlike/{{joke['id']}}"><button>Unlike!</button></a></p>                
+                    {% else: %}
+                    <p><a href="/like/{{joke['id']}}"><button>Like!</button></a></p>
+                    {% endif %}
+
+
                     {% if session['user_id'] == joke.user_id %}
                         <a href="/delete_joke/{{joke['id']}}"><button>Delete Joke</button></a>                   
                     {% endif %}     

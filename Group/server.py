@@ -142,9 +142,29 @@ def landing():
     query = "SELECT jokes.user_id, jokes.id, users.first_name, users.last_name, users.alias, jokes.joke, jokes.punchline, jokes.created_at, COUNT(likes.joke_id) as times_liked FROM likes RIGHT JOIN jokes ON jokes.id = likes.joke_id LEFT JOIN users ON jokes.user_id = users.id GROUP BY jokes.user_id, jokes.id, users.first_name, users.last_name, users.alias, jokes.joke, jokes.punchline, jokes.created_at ORDER BY jokes.created_at DESC"
     jokes = mysql.query_db(query)
 
+
+
+    mysql = connectToMySQL(database)
+    query = "select * from likes WHERE user_id = %(user_id)s"
+    is_liked = mysql.query_db(query, data)
+    print(is_liked)
+
+    mysql = connectToMySQL(database)
+    query = "select * from jokes WHERE user_id = %(user_id)s"
+    data = {'user_id': session['user_id']}
+    my_jokes = mysql.query_db(query, data)
+    print(str(jokes))
+    print(str(session['user_id']))
+
+    liked_jokes = []
+    for liked in is_liked:
+        liked_jokes.append(liked['joke_id'])    
+    print(liked_jokes)
+
+
     print("*"*20)
     print(jokes)
-    return render_template("/landing.html", user=user[0], jokes=jokes)
+    return render_template("/landing.html", user=user[0], jokes=jokes, liked_jokes=liked_jokes, my_jokes=my_jokes, my_id=session['user_id'])
 
 
 
@@ -196,13 +216,13 @@ def delete_joke(joke_id):
 @app.route("/details/<joke_id>")
 def joke_details(joke_id):
     mysql = connectToMySQL(database)
-    query = "SELECT * FROM jokes LEFT JOIN users ON jokes.user_id = users.id WHERE jokes.id = %(mid)s"
+    query = "SELECT * FROM jokes LEFT JOIN users ON jokes.user_id = users.id WHERE jokes.id = %(joke_id)s"
     data = {
         'joke_id': joke_id
     }
     jokes = mysql.query_db(query, data)
     mysql = connectToMySQL(database)
-    query = "SELECT * FROM likes LEFT JOIN users ON users_id = users.id WHERE jokes_id =  %(mid)s"
+    query = "SELECT * FROM likes LEFT JOIN users ON users_id = users.id WHERE jokes_id =  %(joke_id)s"
     data = {
         'joke_id': joke_id
     }
@@ -238,6 +258,29 @@ def update_user():
 @app.route('/back')
 def back():
     return redirect('/landing')
+
+@app.route("/unlike/<joke_id>")
+def unlike_joke(joke_id):
+    query = "DELETE FROM likes WHERE user_id= %(user_id)s AND joke_id = %(joke_id)s"
+    data = {
+        'user_id': session['user_id'],
+        'joke_id': joke_id
+    }
+    mysql = connectToMySQL(database)
+    mysql.query_db(query, data)
+    return redirect ("/landing")
+
+@app.route("/like/<joke_id>")
+def like_joke(joke_id):
+    mysql = connectToMySQL(database)
+    query = "INSERT INTO likes (user_id, joke_id, created_at, updated_at) VALUES (%(user_id)s, %(joke_id)s, NOW(), NOW())"
+    data = {
+            'user_id': session ['user_id'],
+            'joke_id': joke_id
+        }
+    user = mysql.query_db(query, data)
+    return redirect("/landing")
+
 
 if __name__=="__main__":
     app.run(debug=True)
