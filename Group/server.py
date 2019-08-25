@@ -221,13 +221,13 @@ def joke_details(joke_id):
         'joke_id': joke_id
     }
     jokes = mysql.query_db(query, data)
-    
-    mysql = connectToMySQL(database)
-    query = "SELECT * FROM jokes LEFT JOIN users ON jokes.user_id = users.id WHERE jokes.id = %(joke_id)s"
-    data = {
-        'joke_id': joke_id
-    }
-    punchline = mysql.query_db(query, data)
+
+    # mysql = connectToMySQL(database)
+    # query = "SELECT * FROM jokes LEFT JOIN users ON jokes.user_id = users.id WHERE jokes.id = %(joke_id)s"
+    # data = {
+    #     'joke_id': joke_id
+    # }
+    # punchline = mysql.query_db(query, data)
 
     mysql = connectToMySQL(database)
     query = "SELECT * FROM likes LEFT JOIN users ON users_id = users.id WHERE jokes_id =  %(joke_id)s"
@@ -237,7 +237,8 @@ def joke_details(joke_id):
     likes = mysql.query_db(query, data)
     print("0")
     print("here i am")
-    return render_template("/details.html", jokes=jokes[0], punchline=punchline, likes=likes)
+    # return render_template("/details.html", jokes=jokes[0], punchline=punchline, likes=likes)
+    return render_template("/details.html", jokes=jokes, likes=likes)
 
 
 @app.route("/edit/1")
