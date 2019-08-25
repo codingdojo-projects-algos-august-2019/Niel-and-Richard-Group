@@ -12,13 +12,13 @@
     <a href="/logout"><button>Logout</button></a>    
 
 
-    <p>Joke: {{joke['joke']}}</p>
+    <p>Joke: {{jokes['joke']}}</p>
     <p>Punchline: {{punchline['punchline']}}</p>
-    <p>Joke User: {{jokes['fist_name']}} {{jokes['last_name']}}</p>
+    <p>Joke User: {{user_id['fist_name']}} {{user_id['last_name']}}</p>
     <p>Joke Created At: {{jokes['created_at']}}</p>
     <p>Users that liked this message:
         <ul>
-        {% for user in users_who_liked%}
+        {% for user in likes%}
             <li>{{user['first_name']}} {{user['last_name']}}</li>
         {%endfor%}
         </ul>
