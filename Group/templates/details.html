@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/landing_stylesheet.css') }}">
+    <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/landing_stylesheet.css') }}"> -->
     <title>Document</title>
 </head>
 <body>
@@ -14,12 +14,12 @@
 
     <p>Joke: {{jokes['joke']}}</p>
     <p>Punchline: {{jokes['punchline']}}</p>
-    <p>Joke User: {{jokes['first_name']}} {{jokes['last_name']}}</p>
+    <p>Joke User: {{user['first_name']}} {{user['last_name']}}</p>
     <p>Joke Created At: {{jokes['created_at']}}</p>
     <p>Users that liked this message:
         <ul>
-        {% for user in likes %}
-            <li>{{user['first_name']}} {{user['last_name']}}</li>
+        {%for like in likes%}
+            <li>{{like['first_name']}} {{like['last_name']}}</li>
         {%endfor%}
         </ul>
     </p>

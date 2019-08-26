@@ -215,30 +215,36 @@ def delete_joke(joke_id):
 
 @app.route("/details/<joke_id>")
 def joke_details(joke_id):
+    user = {}
     mysql = connectToMySQL(database)
-    query = "SELECT * FROM jokes LEFT JOIN users ON jokes.user_id = users.id WHERE jokes.id = %(joke_id)s"
-    data = {
-        'joke_id': joke_id
-    }
-    jokes = mysql.query_db(query, data)
-
-    # mysql = connectToMySQL(database)
-    # query = "SELECT * FROM jokes LEFT JOIN users ON jokes.user_id = users.id WHERE jokes.id = %(joke_id)s"
-    # data = {
-    #     'joke_id': joke_id
-    # }
-    # punchline = mysql.query_db(query, data)
-
-    mysql = connectToMySQL(database)
-    query = "SELECT * FROM likes LEFT JOIN users ON users_id = users.id WHERE jokes_id =  %(joke_id)s"
+    query = "SELECT * from likes JOIN users ON users.id = likes.user_id where joke_id = %(joke_id)s"
     data = {
         'joke_id': joke_id
     }
     likes = mysql.query_db(query, data)
-    print("0")
-    print("here i am")
-    # return render_template("/details.html", jokes=jokes[0], punchline=punchline, likes=likes)
-    return render_template("/details.html", jokes=jokes, likes=likes)
+    mysql = connectToMySQL(database)
+    query = "SELECT * FROM jokes where id = %(joke_id)s"
+    data = {
+        'joke_id': joke_id
+    }
+    jokes = mysql.query_db(query, data)
+    print(jokes)
+    if len(jokes) > 0:
+        print('has more')
+        jokes = jokes[0]
+        user_id = jokes['user_id']
+        print(user_id)
+        mysql = connectToMySQL(database)
+        query = "SELECT * from users where id = %(user_id)s"
+        print(query)
+        data = {
+            'user_id': user_id
+        } 
+        user = mysql.query_db(query, data)
+        if len(user) > 0:
+            user = user[0]
+
+    return render_template("/details.html", likes=likes, jokes=jokes, user=user)
 
 
 @app.route("/edit/1")
