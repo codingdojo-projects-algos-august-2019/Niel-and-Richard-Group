@@ -1,21 +1,28 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/landing_stylesheet.css') }}">
-    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/edit_stylesheet.css') }}">
+    <title>Jokes Edit User Info</title>
 </head>
 <body>
-    <legend>Edit My Account</legend>
-    <a href="/back">Back</a>
-    <a href="/logout"><button>Logout</button></a>    
-    <form action="/edit" method='post'>
-        <p>First Name: <input type="text" name="first_name" value="{{user['first_name']}}"></p>
-        <p>Last Name: <input type="text" name="last_name" value="{{user['last_name']}}"></p>
-        <p>Email: <input type="text" name="email" value="{{user['email']}}"></p>
-        <input type="submit" value="Update">
-    </form>
+    <main id="container">
+        <h1>Edit My Account</h1>
+        <a class="back_link" href="/back">Back</a>
+        <a class="logout_button" href="/logout"><button>Logout</button></a>    
+        <form class="top" action="/update/{{ session['user_id'] }}" method='post'>
+            <p>First Name: <input class="input_box" type="text" name="first_name" value="{{user['first_name']}}"></p>
+            <p>Last Name: <input class="input_box" type="text" name="last_name" value="{{user['last_name']}}"></p>
+            <p>Email: <input class="input_box" type="text" name="email" value="{{user['email']}}"></p>
+            <input class="submit_button" type="submit" value="Update">
+        </form>
+        <footer>
+            <h4>Powered By <span class="red">GoodTimes</span></h4>
+        </footer>
+    </main>
 </body>
 </html>

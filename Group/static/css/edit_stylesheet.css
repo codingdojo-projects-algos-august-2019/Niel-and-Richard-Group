@@ -1,0 +1,173 @@
+
+
+
+/* landing.html Style Sheet 
+Neil Denning
+Richard Kim
+*/
+
+
+*{
+    padding: 0px;
+    margin: 0px auto;
+    /* outline: 1px solid red; */
+}
+
+body{
+    background-color:rgb(0, 0, 0);
+}
+
+#container{
+    background-image: linear-gradient( rgb(0, 54, 70) 50%,  rgb(0, 161, 230));
+    border: 5px groove rgb(100, 170, 255);
+    min-height: 400px;
+    width: 1366px;
+    border-radius: 7px;            
+}
+
+.top{
+    display: inline-block;
+    vertical-align: top;
+    width: 800px;
+    border-right: 2px solid rgb(100, 170, 255);
+    border-top: 2px solid rgb(100, 170, 255);
+    border-radius: 20px;
+    background-image: linear-gradient(rgb(0, 0, 0),rgb(1, 62, 99),rgb(0, 0, 0));
+    margin: 40px 0px 0px 100px;
+}
+
+p{
+    display: inline-block;
+    vertical-align: top;
+    margin: 0px 0px 0px 80px;
+    padding: 5px 20px 5px 20px;           
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(100, 170, 255);
+    font-size: 30px;
+    text-align: center;
+    text-shadow: 2px 2px 2px rgb(0, 0, 0);
+    letter-spacing: 3px;
+}
+
+.back_link{
+    display: inline-block;
+    vertical-align: top;
+    margin: 35px 0px 0px 260px;
+    padding: 2px 7px 2px 7px;           
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: rgb(100, 170, 255);
+    background-color: rgb(0,0,0);
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: 3px;
+    border: rgb(100, 170, 255);
+    border-radius: 10px;
+}
+
+h1{
+    display: inline-block;
+    margin: 10px 0px 20px 20px;
+    padding: 0px 0px 0px 0px;           
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: rgb(100, 170, 255);
+    font-size: 56px;
+    text-align: center;
+    text-shadow: 2px 2px 2px rgb(0, 0, 0);
+    letter-spacing: 3px;
+}
+
+h4{
+    display: inline-block;
+    background-color:rgb(0, 0, 0);
+    border-radius: 5px;
+    margin: 60px 0px 20px 400px;
+    padding: 5px 10px 5px 10px;           
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: rgb(248, 250, 205);
+    font-size: 18px;
+    text-align: center;
+    letter-spacing: 3px;
+}
+
+.input_box{
+    display: inline-block;
+    vertical-align: top;
+    width: 250px;
+    border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: lighter;
+    letter-spacing: 3px;
+    background-color: rgb(0, 0, 0);
+    color: rgb(100, 170, 255);
+    margin: 5px 0px 10px 20px;
+    padding: 0px 0px 0px 10px;
+    text-shadow: 1px 1px 1px black;
+    box-shadow: 2px 2px 2px black;           
+    font-size: 20px;
+    border: 1px solid rgb(100, 170, 255);
+}
+
+.logout_button{
+    display: inline-block;
+    vertical-align: top;
+    background-image: linear-gradient(rgb(0, 0, 0),rgb(1, 62, 99),rgb(0, 0, 0));
+    margin: 20px 0px 20px 20px;
+    padding: 10px 15px 10px 15px;           
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(100, 170, 255);
+    font-size: 18px;
+    text-align: center;
+    text-shadow: 2px 2px 2px rgb(0, 0, 0);
+    letter-spacing: 3px;
+    border-radius: 10px;
+}
+
+
+.red{
+    color: rgb(191, 0, 0);
+}
+
+button{
+    display: inline-block;
+    margin: 5px 0px 0px 5px;
+    padding: 2px 7px 2px 7px;           
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: rgb(100, 170, 255);
+    background-color: rgb(0,0,0);
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: 3px;
+    border: rgb(100, 170, 255);
+    border-radius: 10px;
+}
+
+a{
+    display: inline-block;
+    vertical-align: top;
+    margin: 5px 0px 0px 5px;
+    padding: 2px 7px 2px 7px;           
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: rgb(100, 170, 255);
+    background-color: rgb(0,0,0);
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: 3px;
+    border: rgb(100, 170, 255);
+    border-radius: 10px;
+}
+
+.submit_button{
+    display: inline-block;
+    vertical-align: top;
+    background-image: linear-gradient(rgb(0, 0, 0),rgb(1, 62, 99),rgb(0, 0, 0));
+    margin: 20px 0px 20px 220px;
+    padding: 10px 15px 10px 15px;           
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(100, 170, 255);
+    font-size: 18px;
+    text-align: center;
+    text-shadow: 2px 2px 2px rgb(0, 0, 0);
+    letter-spacing: 3px;
+    border: 2px solid rgb(100, 170, 255);
+    border-radius: 10px;
+}

@@ -1,27 +1,55 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/landing_stylesheet.css') }}"> -->
-    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/edit_stylesheet.css') }}">
+    <title>Jokes Details</title>
 </head>
 <body>
-    <a href="/back">Back</a>
-    <a href="/logout"><button>Logout</button></a>    
+    <main id="container">
+        <h1>User and Joke Details</h1>
+        <a class="back_link" href="/back">Back</a>
+        <a class="logout_button" href="/logout"><button>Logout</button></a>    
+    
+        <!-- <table>
+            <thead>
+                <tr>
+                    <th>Joke</th>
+                    <th>Punchline</th>
+                    <th>Posted By</th>
+                    <th>Created At</th>
+                    <th>Users that liked this Joke</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table> -->
 
 
-    <p>Joke: {{jokes['joke']}}</p>
-    <p>Punchline: {{jokes['punchline']}}</p>
-    <p>Joke User: {{user['first_name']}} {{user['last_name']}}</p>
-    <p>Joke Created At: {{jokes['created_at']}}</p>
-    <p>Users that liked this message:
-        <ul>
-        {%for like in likes%}
-            <li>{{like['first_name']}} {{like['last_name']}}</li>
-        {%endfor%}
-        </ul>
-    </p>
+
+
+        <p>Joke: {{jokes['joke']}}</p>
+        <p>Punchline: {{jokes['punchline']}}</p>
+        <p>Joke User: {{user['first_name']}} {{user['last_name']}}</p>
+        <p>Joke Created At: {{jokes['created_at']}}</p>
+        <p>Users that liked this message:
+            <ul>
+            {%for like in likes%}
+                <li>{{like['first_name']}} {{like['last_name']}}</li>
+            {%endfor%}
+            </ul>
+        </p>
+    </main>
 </body>
 </html>

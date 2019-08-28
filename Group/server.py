@@ -247,24 +247,24 @@ def joke_details(joke_id):
     return render_template("/details.html", likes=likes, jokes=jokes, user=user)
 
 
-@app.route("/edit/1")
-def edit_user():
-    query = "SELECT * FROM users WHERE id = %(id)s"
+@app.route("/edit/<user_id>")
+def edit_user(user_id):
+    query = "SELECT * FROM users WHERE id = %(user_id)s"
     data = {
-        'id': session['user_id']
+        'user_id': session['user_id']
     }
     mysql = connectToMySQL(database)
     user = mysql.query_db(query, data)
     return render_template("/edit.html", user=user[0])
 
-@app.route("/edit/1", methods=['POST'])
-def update_user():
-    query = "UPDATE users SET first_name=%(fn)s, last_name=%(ln)s, email=%(email)s, updated_at=NOW() WHERE id=%(id)s"
+@app.route("/update/<user_id>", methods=['POST'])
+def update_user(user_id):
+    query = "UPDATE users SET first_name=%(fn)s, last_name=%(ln)s, email=%(email)s, updated_at=NOW() WHERE id=%(user_id)s"
     data = {
         'fn': request.form['first_name'],
         'ln': request.form['last_name'],
         'email': request.form['email'],
-        'id': session['user_id']
+        'user_id': user_id
     }
     mysql = connectToMySQL(database)
     mysql.query_db(query, data)
